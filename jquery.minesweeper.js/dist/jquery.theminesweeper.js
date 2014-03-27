@@ -1,11 +1,6 @@
-/*
- * theminesweeper
- * https://github.com/leosartaj/jquery.minesweeper.js
- *
- * Copyright (c) 2014 Sartaj Singh
- * Licensed under the MIT license.
- */
-
+/*! The Minesweeper - v0.1.0 - 2014-03-27
+* https://github.com/leosartaj/jquery.minesweeper.js
+* Copyright (c) 2014 Sartaj Singh; Licensed MIT */
 (function($) {
 
     var buttons = [
