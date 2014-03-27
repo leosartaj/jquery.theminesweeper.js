@@ -8,23 +8,19 @@
 
 (function($) {
 
-    var buttons = [
-        { label: '' },
-        { label: '' },
-        { label: '' },
-        { label: '' },
-        { label: '' },
-        { label: '' }
+    var levels = [
+        { height: 8 , width: 8 }
     ];
 
     // Defines the widget
     $.widget('ss.theminesweeper', {
 
+        
         // widget currrent version
         version: '0.1.0',
 
         options: {
-            buttons: buttons
+            levels: levels
         },
 
         _create: function() {
@@ -42,9 +38,20 @@
         },
 
         _createButtons: function() {
-            var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons'), i;
+            var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
 
-            $.each(this.options.buttons, function(i, button) {
+            for(i = 0; i < width; i++) {
+                for(j = 0; j < height; j++) {
+                    if( j === 0) {
+                        buttons.push({label: '', classname: 'ss-minesweeper-left'});
+                    }
+                    else {
+                        buttons.push({label: ''})
+                    }
+                }
+            }
+
+            $.each(buttons, function(i, button) {
                 var btn = el.clone().text(button.label).appendTo(container).button();
                 if(!!button.classname) {
                     btn.addClass(button.classname);

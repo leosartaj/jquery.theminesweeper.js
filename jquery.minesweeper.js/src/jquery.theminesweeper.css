@@ -1,0 +1,8 @@
+
+.ss-minesweeper button {
+    float: left;
+}
+
+.ss-minesweeper-left {
+    clear: left;
+}
