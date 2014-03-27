@@ -9,7 +9,7 @@
 (function($) {
 
     var levels = [
-        { height: 8 , width: 8 }
+        { height: 8 , width: 8, mines: 10 }
     ];
 
     // Defines the widget
@@ -27,7 +27,12 @@
             this.element.addClass('ss-minesweeper');
             this._createWrapper();
             this._createButtons();
+            this._generateMines();
             this._renderMarkup();
+
+            this._on({
+                'click button': this._clickHandler
+            });
         },
         
         _createWrapper: function() {
@@ -41,33 +46,69 @@
             var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
 
             for(i = 0; i < width; i++) {
+                buttons[i] = [];
                 for(j = 0; j < height; j++) {
                     if( j === 0) {
-                        buttons.push({label: '', classname: 'ss-minesweeper-left'});
+                        buttons[i][j] = {label: '', mine: 'n', classname: 'ss-minesweeper-left'};
                     }
                     else {
-                        buttons.push({label: ''})
+                        buttons[i][j] = {label: '', mine: 'n'};
                     }
                 }
             }
 
             $.each(buttons, function(i, button) {
-                var btn = el.clone().text(button.label).appendTo(container).button();
-                if(!!button.classname) {
-                    btn.addClass(button.classname);
-                }
+                $.each(button, function(i, but) {
+                    var btn = el.clone().text(but.label).appendTo(container).button();
+                    if(!!but.classname) {
+                        btn.addClass(but.classname);
+                    }
 
-                if(!!button.classname) {
-                    btn.addClass(button.classname);
-                }
-
+                    if(!!but.classname) {
+                        btn.addClass(but.classname);
+                    }
+                });
             });
-
-                container.appendTo(this.shell);
+            level.buttons = buttons;
+            container.appendTo(this.shell);
         },
 
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
+        },
+
+        _setOptions: function() {
+            this._superApply(arguments);
+        },
+
+        _setOption: function(key, val) {
+            this._super(key, val);
+
+            if(key === 'levels') {
+                this.shell.find('button').remove();
+                this._createButtons();
+                this._renderMarkup();
+            }
+            else if(key === 'disable') {
+                this.shell.find('button').button('option', key, val);
+            }
+        },
+
+        _generateMines: function() {
+            var level = this.options.levels[0],mines = level.mines, width = level.width, height = level.height, x, y;
+
+            while(mines !== 0) {
+                x = Math.floor(width * Math.random());
+                y = Math.floor(height * Math.random());
+                level.buttons[x][y].mine = 'y';
+                mines--;
+            }
+
+
+        },
+
+        _clickHandler: function() {
+
         }
 
     });
