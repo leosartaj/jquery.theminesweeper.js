@@ -33,18 +33,18 @@
     strictEqual(this.elems.theminesweeper(), this.elems, 'should be chainable');
   });
 
-  test('is awesome', function() {
+/*  test('is awesome', function() {
     expect(1);
     strictEqual(this.elems.theminesweeper().text(), 'awesome0awesome1awesome2', 'should be awesome');
-  });
+  }); */
 
   module('jQuery.theminesweeper');
 
-  test('is awesome', function() {
+  /* test('is awesome', function() {
     expect(2);
     strictEqual($.theminesweeper(), 'awesome.', 'should be awesome');
     strictEqual($.theminesweeper({punctuation: '!'}), 'awesome!', 'should be thoroughly awesome');
-  });
+  }); */
 
   module(':theminesweeper selector', {
     // This will run before each test in this module.
@@ -53,10 +53,10 @@
     }
   });
 
-  test('is awesome', function() {
+  /* test('is awesome', function() {
     expect(1);
     // Use deepEqual & .get() when comparing jQuery objects.
     deepEqual(this.elems.filter(':theminesweeper').get(), this.elems.last().get(), 'knows awesome when it sees it');
-  });
+  }); */
 
 }(jQuery));
