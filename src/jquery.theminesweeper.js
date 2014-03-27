@@ -89,6 +89,7 @@
             if(key === 'levels') {
                 this.shell.find('button').remove();
                 this._createButtons();
+                this._generateMines();
                 this._renderMarkup();
             }
             else if(key === 'disable') {
@@ -102,8 +103,10 @@
             while(mines !== 0) {
                 x = Math.floor(width * Math.random());
                 y = Math.floor(height * Math.random());
-                level.buttons[x][y].mine = 'y';
-                mines--;
+                if(level.buttons[x][y].mine === 'n') {
+                    level.buttons[x][y].mine = 'y';
+                    mines--;
+                }
             }
 
         },
@@ -117,7 +120,7 @@
             var check = this.options.levels[0].buttons[+ui.data('x')][+ui.data('y')].mine;
 
             if(check === 'y') {
-                alert('lost');
+                ui.text('m');
             }
         }
 
