@@ -48,7 +48,7 @@
             for(i = 0; i < width; i++) {
                 buttons[i] = [];
                 for(j = 0; j < height; j++) {
-                    if( j === 0) {
+                    if(j === 0) {
                         buttons[i][j] = {label: ' ', mine: 'n', classname: 'ss-minesweeper-left'};
                     }
                     else {
@@ -105,6 +105,7 @@
                 y = Math.floor(height * Math.random());
                 if(level.buttons[x][y].mine === 'n') {
                     level.buttons[x][y].mine = 'y';
+                    console.log(x + ',' + y);
                     mines--;
                 }
             }
@@ -123,36 +124,52 @@
                 ui.text('m');
                 return 0;
             }
-            this._checkNum(x, y, level);
+            this._checkNum(e, ui);
         },
 
-        _checkNum: function(x, y, level) {
+        _checkNum: function(e, ui) {
+            var level = this.options.levels[0], x = +ui.data('x'), y = +ui.data('y');
             var num = 0;
-            if(level.buttons[x - 1][y - 1].mine === 'y') {
-                num++;
+            if(x - 1 > -1 && y - 1 > -1) {
+                if(level.buttons[x - 1][y - 1].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x][y - 1].mine === 'y') {
-                num++;
+            if(y - 1 > -1) {
+                if(level.buttons[x][y - 1].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x - 1][y].mine === 'y') {
-                num++;
+            if(x - 1 > -1) {
+                if(level.buttons[x - 1][y].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x + 1][y + 1].mine === 'y') {
-                num++;
+            if(x + 1 < levels.width && y + 1 < levels.height) {
+                if(level.button[x + 1][y + 1].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x + 1][y].mine === 'y') {
-                num++;
+            if (x + 1 < levels.width) {
+                if(level.buttons[x + 1][y].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x][y + 1].mine === 'y') {
-                num++;
+            if(y + 1 < levels.height) {
+                if(level.buttons[x][y + 1].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x + 1][y - 1].mine === 'y') {
-                num++;
+            if (x + 1 < levels.width && y - 1 > -1) {
+                if(level.buttons[x + 1][y - 1].mine === 'y') {
+                    num++;
+                }
             }
-            if(level.buttons[x - 1][y + 1].mine === 'y') {
-                num++;
+            if(x - 1 > -1 && y + 1 < levels.height) {
+                if(level.buttons[x - 1][y + 1].mine === 'y') {
+                    num++;
+                }
             }
-            console.log(num);
         }
 
     });
