@@ -56,9 +56,9 @@
                     }
                 }
             }
-
+            i = 0; j = 0;
             $.each(buttons, function(i, button) {
-                $.each(button, function(i, but) {
+                $.each(button, function(j, but) {
                     var btn = el.clone().text(but.label).appendTo(container).button();
                     if(!!but.classname) {
                         btn.addClass(but.classname);
@@ -67,6 +67,8 @@
                     if(!!but.classname) {
                         btn.addClass(but.classname);
                     }
+                    btn.data('x', j);
+                    btn.data('y', i);
                 });
             });
             level.buttons = buttons;
@@ -104,11 +106,19 @@
                 mines--;
             }
 
-
         },
 
-        _clickHandler: function() {
+        _clickHandler: function(e) {
+            var btn = $(e.target).closest('button');
+            this._checkMine(e, btn);
+        },
 
+        _checkMine: function(e, ui) {
+            var check = this.options.levels[0].buttons[+ui.data('x')][+ui.data('y')].mine;
+
+            if(check === 'y') {
+                alert('lost');
+            }
         }
 
     });
