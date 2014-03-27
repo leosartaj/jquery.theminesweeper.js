@@ -49,10 +49,10 @@
                 buttons[i] = [];
                 for(j = 0; j < height; j++) {
                     if( j === 0) {
-                        buttons[i][j] = {label: '', mine: 'n', classname: 'ss-minesweeper-left'};
+                        buttons[i][j] = {label: ' ', mine: 'n', classname: 'ss-minesweeper-left'};
                     }
                     else {
-                        buttons[i][j] = {label: '', mine: 'n'};
+                        buttons[i][j] = {label: ' ', mine: 'n'};
                     }
                 }
             }
@@ -117,11 +117,42 @@
         },
 
         _checkMine: function(e, ui) {
-            var check = this.options.levels[0].buttons[+ui.data('x')][+ui.data('y')].mine;
+            var level = this.options.levels[0], x = +ui.data('x'), y = +ui.data('y'), check = level.buttons[x][y].mine;
 
             if(check === 'y') {
                 ui.text('m');
+                return 0;
             }
+            this._checkNum(x, y, level);
+        },
+
+        _checkNum: function(x, y, level) {
+            var num = 0;
+            if(level.buttons[x - 1][y - 1].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x][y - 1].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x - 1][y].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x + 1][y + 1].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x + 1][y].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x][y + 1].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x + 1][y - 1].mine === 'y') {
+                num++;
+            }
+            if(level.buttons[x - 1][y + 1].mine === 'y') {
+                num++;
+            }
+            console.log(num);
         }
 
     });
