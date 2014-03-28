@@ -6,3 +6,7 @@
 .ss-minesweeper-left {
     clear: left;
 }
+
+span .ui-button-text {
+    font-size: 2px;
+}

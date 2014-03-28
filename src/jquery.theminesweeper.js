@@ -57,22 +57,24 @@
             }
             for(i = 0; i < width; i++) {
                 for(j = 0; j < height; j++) {
-                    var btn = el.clone().text(buttons[i][j].label).appendTo(container).button();
+                    var btn = el.clone().text(buttons[i][j].label).appendTo(container);
 
                     if(!!buttons[i][j].classname) {
                         btn.addClass(buttons[i][j].classname);
                     }
-                    btn.attr('x', j);
-                    btn.attr('y', i);
-                    btn.attr('xy',j + ',' +  i);
+                    btn.attr('x', i);
+                    btn.attr('y', j);
+                    btn.attr('xy',i + ',' +  j);
                 }
             }
             level.buttons = buttons;
+            container.buttonset().find('label').css('width', '25%');
             container.appendTo(this.shell);
         },
 
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
+            this.element.find('button').width('45');
         },
 
         _setOptions: function() {
@@ -135,19 +137,19 @@
             if((x - 1) > -1) {
                 level.buttons[x - 1][y].near++;
             }
-            if(((y + 1) < level.width) && ((x + 1) < level.height)) {
+            if(((y + 1) < level.height) && ((x + 1) < level.width)) {
                 level.buttons[x + 1][y + 1].near++;
             }
-            if ((x + 1) < level.height) {
+            if ((x + 1) < level.width) {
                 level.buttons[x + 1][y].near++;
             }
-            if((y + 1) < level.width) {
+            if((y + 1) < level.height) {
                 level.buttons[x][y + 1].near++;
             }
-            if (((x + 1) < level.height) && ((y - 1) > -1)) {
+            if (((x + 1) < level.width) && ((y - 1) > -1)) {
                 level.buttons[x + 1][y - 1].near++;
             }
-            if(((x - 1) > -1) && ((y + 1) < level.width)) {
+            if(((x - 1) > -1) && ((y + 1) < level.height)) {
                 level.buttons[x - 1][y + 1].near++;
             }
         },
@@ -168,8 +170,8 @@
         },
 
         _showRegion: function(x, y) {
-
             var c = x + ',' + y, level = this.options.levels[0], btn = level.buttons[x][y], i, j, nx, ny;
+
             if(btn.active === 'y') {
                 if(btn.near !== 0) {
                     $('button[xy="' + c + '"]').find('span').text(btn.near);
