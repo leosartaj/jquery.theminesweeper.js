@@ -11,7 +11,7 @@
         { height: 8 , width: 8, mines: 10 }
     ];
     var color = {
-        0: 'light-gray', 1: 'blue', 2: 'green', 3: 'red', 4: 'yellow-green', 5: 'green', 6: 'green-cyan', 7: 'cyan', 8: 'cyan-blue', 9: 'dark-red'
+        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', 9: 'black'
     };
 
     // Defines the widget
@@ -34,7 +34,7 @@
             this._renderMarkup();
 
             this._on({
-                'click button': this._clickHandler
+                'mousedown button': this._clickHandler
             });
         },
         
@@ -79,7 +79,7 @@
 
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
-            this.element.find('button').css('background', 'light-gray').css('width', '45').css('float', 'left');
+            this.element.find('button').css('width', '45').css('float', 'left').css('color', 'transparent');
             $('.ss-minesweeper-left').css('clear', 'left');
         },
 
@@ -118,14 +118,19 @@
 
         _clickHandler: function(e) {
             var btn = $(e.target).closest('button');
-            var result = this._checkMine(e, btn);
-            if(result === true) {
-                alert('Win!');
-                this.element.find('button').button('disable').css('opacity', '1');
+            if(e.which === 1) {
+                var result = this._checkMine(e, btn);
+                if(result === true) {
+                    alert('Win!');
+                    this.element.find('button').button('disable').css('opacity', '1');
+                }
+                else if(result === false) {
+                    alert('Lost');
+                    this.element.find('button').button('disable').css('opacity', '1');
+                }
             }
-            else if(result === false) {
-                alert('Lost');
-                this.element.find('button').button('disable').css('opacity', '1');
+            else {
+                this._setFlag(btn);
             }
         },
 
@@ -180,7 +185,7 @@
                 if(level.buttons[x][y].mine === 'y') {
                     $(this).find('span').text('9').css('color', that.options.color[9]);
                 }
-                else {
+                else{
                     $(this).find('span').text(level.buttons[x][y].near).css('color', that.options.color[level.buttons[x][y].near]);
                 }
             });
@@ -191,13 +196,13 @@
 
             if(btn.active === 'y') {
                 if(btn.near !== 0) {
-                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]);
+                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
                     btn.active = 'n';
                     level.left--;
                     return 0;
                 }
                 else {
-                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]);
+                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
                     btn.active = 'n';
                     level.left--;
                     for(i = -1; i < 2; i ++) {
@@ -222,6 +227,16 @@
                 return true;
             }
             return false;
+        },
+
+        _setFlag: function(ui) {
+            var span = ui.find('span');
+            if(span.text() === 'F') {
+                span.text('x').css('color', 'transparent');
+            }
+            else {
+                span.text('F').css('color', 'red');
+            }
         }
 
 
