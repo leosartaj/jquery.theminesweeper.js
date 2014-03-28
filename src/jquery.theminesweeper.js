@@ -1,5 +1,4 @@
-/*
- * theminesweeper
+ /* theminesweeper
  * https://github.com/leosartaj/jquery.minesweeper.js
  *
  * Copyright (c) 2014 Sartaj Singh
@@ -63,8 +62,9 @@
                     if(!!buttons[i][j].classname) {
                         btn.addClass(buttons[i][j].classname);
                     }
-                    btn.data('x', j);
-                    btn.data('y', i);
+                    btn.attr('x', j);
+                    btn.attr('y', i);
+                    btn.attr('xy',j + ',' +  i);
                 }
             }
             level.buttons = buttons;
@@ -114,7 +114,7 @@
         },
 
         _checkMine: function(e, ui) {
-            var level = this.options.levels[0], x = +ui.data('x'), y = +ui.data('y');
+            var level = this.options.levels[0], x = +ui.attr('x'), y = +ui.attr('y');
 
             if(level.buttons[x][y].mine === 'y') {
                 this._showBoard();
@@ -156,8 +156,8 @@
             var x, y, level = this.options.levels[0];
 
             $('button').each(function() {
-                x = +$(this).data('x');
-                y = +$(this).data('y');
+                x = +$(this).attr('x');
+                y = +$(this).attr('y');
                 if(level.buttons[x][y].mine === 'y') {
                     $(this).find('span').text('9');
                 }
@@ -168,6 +168,31 @@
         },
 
         _showRegion: function(x, y) {
+
+            var c = x + ',' + y, level = this.options.levels[0], btn = level.buttons[x][y], i, j, nx, ny;
+            if(btn.active === 'y') {
+                if(btn.near !== 0) {
+                    $('button[xy="' + c + '"]').find('span').text(btn.near);
+                    btn.active = 'n';
+                    return 0;
+                }
+                else {
+                    $('button[xy="' + c + '"]').find('span').text(btn.near);
+                    btn.active = 'n';
+                    for(i = -1; i < 2; i ++) {
+                        for(j = -1; j < 2; j++) {
+                            nx = x + i;
+                            ny = y + j;
+                            if(nx > -1 && nx < level.height && ny > -1 && ny < level.width) {
+                                this._showRegion(nx, ny);
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                return 0;
+            }
         }
 
 
