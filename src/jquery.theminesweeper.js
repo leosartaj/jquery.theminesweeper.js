@@ -120,6 +120,7 @@
                 this._showBoard();
                 return 0;
             }
+            this._showRegion(x, y);
         },
 
         _calNear: function(x, y) {
@@ -164,6 +165,9 @@
                     $(this).find('span').text(level.buttons[x][y].near);
                 }
             });
+        },
+
+        _showRegion: function(x, y) {
         }
 
 
