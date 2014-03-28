@@ -49,28 +49,24 @@
                 buttons[i] = [];
                 for(j = 0; j < height; j++) {
                     if(j === 0) {
-                        buttons[i][j] = {label: ' ', mine: 'n', classname: 'ss-minesweeper-left'};
+                        buttons[i][j] = {label: 'x', mine: 'n', classname: 'ss-minesweeper-left'};
                     }
                     else {
-                        buttons[i][j] = {label: ' ', mine: 'n'};
+                        buttons[i][j] = {label: 'x', mine: 'n'};
                     }
                 }
             }
-            i = 0; j = 0;
-            $.each(buttons, function(i, button) {
-                $.each(button, function(j, but) {
-                    var btn = el.clone().text(but.label).appendTo(container).button();
-                    if(!!but.classname) {
-                        btn.addClass(but.classname);
-                    }
+            for(i = 0; i < width; i++) {
+                for(j = 0; j < height; j++) {
+                    var btn = el.clone().text(buttons[i][j].label).appendTo(container).button();
 
-                    if(!!but.classname) {
-                        btn.addClass(but.classname);
+                    if(!!buttons[i][j].classname) {
+                        btn.addClass(buttons[i][j].classname);
                     }
                     btn.data('x', j);
                     btn.data('y', i);
-                });
-            });
+                }
+            }
             level.buttons = buttons;
             container.appendTo(this.shell);
         },
@@ -105,7 +101,7 @@
                 y = Math.floor(height * Math.random());
                 if(level.buttons[x][y].mine === 'n') {
                     level.buttons[x][y].mine = 'y';
-                    console.log(x + ',' + y);
+                    console.log('yes');
                     mines--;
                 }
             }
@@ -118,59 +114,72 @@
         },
 
         _checkMine: function(e, ui) {
-            var level = this.options.levels[0], x = +ui.data('x'), y = +ui.data('y'), check = level.buttons[x][y].mine;
+            var level = this.options.levels[0], x = +ui.data('x'), y = +ui.data('y');
 
-            if(check === 'y') {
-                ui.text('m');
+            if(level.buttons[x][y].mine === 'y') {
+                ui.find('span').text('9');
                 return 0;
             }
-            this._checkNum(e, ui);
+            ui.find('span').text(this._checkNum(x, y));
         },
 
-        _checkNum: function(e, ui) {
-            var level = this.options.levels[0], x = +ui.data('x'), y = +ui.data('y');
-            var num = 0;
-            if(x - 1 > -1 && y - 1 > -1) {
+        _checkNum: function(x, y) {
+            var level = this.options.levels[0], num = 0;
+
+            if(((x - 1) > -1) && ((y - 1) > -1)) {
                 if(level.buttons[x - 1][y - 1].mine === 'y') {
                     num++;
                 }
             }
-            if(y - 1 > -1) {
+            if((y - 1) > -1) {
                 if(level.buttons[x][y - 1].mine === 'y') {
                     num++;
                 }
             }
-            if(x - 1 > -1) {
+            if((x - 1) > -1) {
                 if(level.buttons[x - 1][y].mine === 'y') {
                     num++;
                 }
             }
-            if(x + 1 < levels.width && y + 1 < levels.height) {
-                if(level.button[x + 1][y + 1].mine === 'y') {
+            if(((y + 1) < level.width) && ((x + 1) < level.height)) {
+                if(level.buttons[x + 1][y + 1].mine === 'y') {
                     num++;
                 }
             }
-            if (x + 1 < levels.width) {
+            if ((x + 1) < level.height) {
                 if(level.buttons[x + 1][y].mine === 'y') {
                     num++;
                 }
             }
-            if(y + 1 < levels.height) {
+            if((y + 1) < level.width) {
                 if(level.buttons[x][y + 1].mine === 'y') {
                     num++;
                 }
             }
-            if (x + 1 < levels.width && y - 1 > -1) {
+            if (((x + 1) < level.height) && ((y - 1) > -1)) {
                 if(level.buttons[x + 1][y - 1].mine === 'y') {
                     num++;
                 }
             }
-            if(x - 1 > -1 && y + 1 < levels.height) {
+            if(((x - 1) > -1) && ((y + 1) < level.width)) {
                 if(level.buttons[x - 1][y + 1].mine === 'y') {
                     num++;
                 }
             }
+
+            if(num === 0) {
+                this._checkNum(x - 1, y + 1);
+                this._checkNum(x + 1, y - 1);
+                this._checkNum(x, y - 1);
+                this._checkNum(x, y + 1);
+                this._checkNum(x - 1, y - 1);
+                this._checkNum(x + 1, y);
+                this._checkNum(x + 1, y + 1);
+                this._checkNum(x - 1, y - 1);
+            }
+            return num;
         }
+
 
     });
 
