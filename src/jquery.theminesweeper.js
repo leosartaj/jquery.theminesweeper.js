@@ -10,6 +10,9 @@
     var levels = [
         { height: 8 , width: 8, mines: 10 }
     ];
+    var color = {
+        0: 'light-gray', 1: 'blue', 2: 'green', 3: 'red', 4: 'yellow-green', 5: 'green', 6: 'green-cyan', 7: 'cyan', 8: 'cyan-blue', 9: 'dark-red'
+    };
 
     // Defines the widget
     $.widget('ss.theminesweeper', {
@@ -19,11 +22,12 @@
         version: '0.1.0',
 
         options: {
-            levels: levels
+            levels: levels,
+            color: color
         },
 
         _create: function() {
-            this.element.addClass('ss-minesweeper');
+            this.element.addClass('ss-minesweeper ui-widget ui-corner-all');
             this._createWrapper();
             this._createButtons();
             this._generateMines();
@@ -68,13 +72,15 @@
                 }
             }
             level.buttons = buttons;
-            container.buttonset().find('label').css('width', '25%');
+            container.buttonset();
             container.appendTo(this.shell);
+            level.left = (height * width);
         },
 
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
-            this.element.find('button').width('45');
+            this.element.find('button').css('background', 'light-gray').css('width', '45').css('float', 'left');
+            $('.ss-minesweeper-left').css('clear', 'left');
         },
 
         _setOptions: function() {
@@ -112,7 +118,15 @@
 
         _clickHandler: function(e) {
             var btn = $(e.target).closest('button');
-            this._checkMine(e, btn);
+            var result = this._checkMine(e, btn);
+            if(result === true) {
+                alert('Win!');
+                this.element.find('button').button('disable').css('opacity', '1');
+            }
+            else if(result === false) {
+                alert('Lost');
+                this.element.find('button').button('disable').css('opacity', '1');
+            }
         },
 
         _checkMine: function(e, ui) {
@@ -120,9 +134,12 @@
 
             if(level.buttons[x][y].mine === 'y') {
                 this._showBoard();
-                return 0;
+                return false;
             }
             this._showRegion(x, y);
+            if(this._checkWin()) {
+                return true;
+            }
         },
 
         _calNear: function(x, y) {
@@ -155,16 +172,16 @@
         },
 
         _showBoard: function() {
-            var x, y, level = this.options.levels[0];
+            var x, y, level = this.options.levels[0], that = this;
 
             $('button').each(function() {
                 x = +$(this).attr('x');
                 y = +$(this).attr('y');
                 if(level.buttons[x][y].mine === 'y') {
-                    $(this).find('span').text('9');
+                    $(this).find('span').text('9').css('color', that.options.color[9]);
                 }
                 else {
-                    $(this).find('span').text(level.buttons[x][y].near);
+                    $(this).find('span').text(level.buttons[x][y].near).css('color', that.options.color[level.buttons[x][y].near]);
                 }
             });
         },
@@ -174,13 +191,15 @@
 
             if(btn.active === 'y') {
                 if(btn.near !== 0) {
-                    $('button[xy="' + c + '"]').find('span').text(btn.near);
+                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]);
                     btn.active = 'n';
+                    level.left--;
                     return 0;
                 }
                 else {
-                    $('button[xy="' + c + '"]').find('span').text(btn.near);
+                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]);
                     btn.active = 'n';
+                    level.left--;
                     for(i = -1; i < 2; i ++) {
                         for(j = -1; j < 2; j++) {
                             nx = x + i;
@@ -195,6 +214,14 @@
             else {
                 return 0;
             }
+        },
+
+        _checkWin: function() {
+            var level = this.options.levels[0];
+            if(level.left === level.mines) {
+                return true;
+            }
+            return false;
         }
 
 
