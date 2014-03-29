@@ -44,19 +44,18 @@
         },
         
         _createWrapper: function() {
-            var el = $('<div/>');
+            var el = $('<div/>'), btn = $('<button/>'), span = $('<span/>'), level = this.options.levels[0];
 
             this.shell = el.clone().addClass('ss-minesweeper-shell ui-widget-header ui-corner-all'); 
             this.display = el.clone().addClass('ss-minesweeper-display ui-corner-all'); 
             this.display.appendTo(this.shell);
+            btn.clone().text('s').addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').data('r', 1).button().appendTo(this.display);
+            span.clone().addClass('ss-minesweeper-mines').text(level.mleft).appendTo(this.display);
+            span.clone().addClass('ss-minesweeper-timer').text('00:00').appendTo(this.display);
         },
 
         _createButtons: function() {
-            var el = $('<button/>'),span = $('<span/>'),container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
-
-            el.clone().text('s').addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').button().appendTo(this.display);
-            span.clone().addClass('ss-minesweeper-mines').text(level.mleft).appendTo(this.display);
-            span.clone().addClass('ss-minesweeper-timer').text('00:00').appendTo(this.display);
+            var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
 
             for(i = 0; i < width; i++) {
                 buttons[i] = [];
@@ -125,24 +124,37 @@
         },
 
         _clickHandler: function(e) {
-            var btn = $(e.target).closest('button');
+            var btn = $(e.target).closest('button'), result;
             if(e.which === 1) {
-                if(btn.find('span').text() === 'F') {
+                if(btn.data('r') === 1) {
+                    this._restart();
+                }
+                else if(btn.find('span').text() === 'F') {
                     this._setFlag(btn);
                     return 0;
                 }
-                var result = this._checkMine(e, btn);
-                if(result === true) {
-                    alert('Win!');
-                    this.element.find('button').button('disable').css('opacity', '1');
+                if(btn.data('r') === 1) {
+                    this._restart();
                 }
-                else if(result === false) {
-                    alert('Lost');
-                    this.element.find('button').button('disable').css('opacity', '1');
+                else {
+                    result = this._checkMine(e, btn);
+                    if(result === true) {
+                        alert('Win!');
+                        this.element.find('.ss-minesweeper-buttons button').button('disable').css('opacity', '1');
+                    }
+                    else if(result === false) {
+                        alert('Lost');
+                        this.element.find('.ss-minesweeper-buttons button').button('disable').css('opacity', '1');
+                    }
                 }
             }
             else {
-                this._setFlag(btn);
+                if(btn.data('r') === 1) {
+                    this._restart();
+                }
+                else {
+                    this._setFlag(btn);
+                }
             }
         },
 
@@ -280,6 +292,17 @@
 
             $('.ss-minesweeper-buttons').masonry({itemSelector: "button", isFitWidth: true, columnWidth: "button"});
 
+        },
+
+        _restart: function() {
+            var el = this.element, level = this.options.levels[0];
+            level.mleft = level.mines;
+            el.find('.ss-minesweeper-buttons').remove();
+            $('.ss-minesweeper-mines').text(level.mleft);
+            $('.ss-minesweeper-timer').text('00:00');
+            this._createButtons();
+            this._renderMarkup();
+            this._generateMines();
         }
 
 
