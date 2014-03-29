@@ -10,14 +10,26 @@
 .ss-minesweeper {
     margin-left: auto;
     margin-right: auto;
-    width: 37em;
+    width: 19.1em;
 }
 
 .ui-button-text {
     font-size: 10px;
 }
 
-.ss-minesweeper-mines {
-
-
+.happy-smiley {
+    background-image: url(../images/smiley1.ico) !important;
 }
+
+.check-smiley {
+    background-image: url(../images/smiley2.ico) !important;
+}
+
+.sad-smiley {
+    background-image: url(../images/smiley3.ico) !important;
+}
+
+.cool-smiley {
+    background-image: url(../images/smiley.ico) !important;
+}
+

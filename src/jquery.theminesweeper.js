@@ -44,18 +44,23 @@
         },
         
         _createWrapper: function() {
-            var el = $('<div/>'), btn = $('<button/>'), span = $('<span/>'), level = this.options.levels[0];
+            var el = $('<div/>'), span = $('<span/>'), level = this.options.levels[0];
 
             this.shell = el.clone().addClass('ss-minesweeper-shell ui-widget-header ui-corner-all'); 
             this.display = el.clone().addClass('ss-minesweeper-display ui-corner-all'); 
             this.display.appendTo(this.shell);
-            btn.clone().text('s').addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').data('r', 1).button().appendTo(this.display);
             span.clone().addClass('ss-minesweeper-mines').text(level.mleft).appendTo(this.display);
             span.clone().addClass('ss-minesweeper-timer').text('00:00').appendTo(this.display);
         },
 
         _createButtons: function() {
             var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
+
+            el.clone().addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').data('r', 1).appendTo(this.display).button({
+                label: 'Smiley', icons:{
+                    primary: 'happy-smiley', secondary: null
+                }, text: false
+            });
 
             for(i = 0; i < width; i++) {
                 buttons[i] = [];
@@ -125,26 +130,27 @@
 
         _clickHandler: function(e) {
             var btn = $(e.target).closest('button'), result;
+            this._changeSmiley('0', '1');
             if(e.which === 1) {
                 if(btn.data('r') === 1) {
                     this._restart();
                 }
                 else if(btn.find('span').text() === 'F') {
                     this._setFlag(btn);
+                    this._changeSmiley('1', '0');
                     return 0;
-                }
-                if(btn.data('r') === 1) {
-                    this._restart();
                 }
                 else {
                     result = this._checkMine(e, btn);
                     if(result === true) {
                         alert('Win!');
                         this.element.find('.ss-minesweeper-buttons button').button('disable').css('opacity', '1');
+                        return 0;
                     }
                     else if(result === false) {
                         alert('Lost');
                         this.element.find('.ss-minesweeper-buttons button').button('disable').css('opacity', '1');
+                        return 0;
                     }
                 }
             }
@@ -156,6 +162,7 @@
                     this._setFlag(btn);
                 }
             }
+            this._changeSmiley('1', '0');
         },
 
         _checkMine: function(e, ui) {
@@ -163,10 +170,12 @@
 
             if(level.buttons[x][y].mine === 'y') {
                 this._showBoard();
+                this._changeSmiley('1', '2');
                 return false;
             }
             this._showRegion(x, y);
             if(this._checkWin()) {
+                this._changeSmiley('1', '3');
                 return true;
             }
         },
@@ -298,11 +307,17 @@
             var el = this.element, level = this.options.levels[0];
             level.mleft = level.mines;
             el.find('.ss-minesweeper-buttons').remove();
+            $('.ss-minesweeper-smiley').remove();
             $('.ss-minesweeper-mines').text(level.mleft);
             $('.ss-minesweeper-timer').text('00:00');
             this._createButtons();
             this._renderMarkup();
             this._generateMines();
+        },
+
+        _changeSmiley: function(from, to) {
+            var smiley = ['happy-smiley', 'check-smiley', 'sad-smiley', 'cool-smiley'];
+            $("." + smiley[+from]).removeClass(smiley[+from]).addClass(smiley[+to]);
         }
 
 
