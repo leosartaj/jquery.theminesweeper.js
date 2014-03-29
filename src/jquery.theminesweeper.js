@@ -39,23 +39,27 @@
         },
         
         _createWrapper: function() {
-            var el = $('<div/>'), display;
+            var el = $('<div/>');
 
-            this.shell = el.clone().addClass('ss-minesweeper-shell');
-            display = el.clone().addClass('ss-minesweeper-display').appendTo(this.shell);
+            this.shell = el.clone().addClass('ss-minesweeper-shell ui-widget-header ui-corner-all'); 
+            this.display = el.clone().addClass('ss-minesweeper-display ui-corner-all ui-widget-content');
+            this.display.appendTo(this.shell);
         },
 
         _createButtons: function() {
-            var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
+            var el = $('<button/>'),span = $('<span/>'),container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
+
+            el.clone().text('s').addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').button().appendTo(this.display);
+            span.clone().addClass('ss-minesweeper-mines').text(level.mines).appendTo(this.display);
 
             for(i = 0; i < width; i++) {
                 buttons[i] = [];
                 for(j = 0; j < height; j++) {
                     if(j === 0) {
-                        buttons[i][j] = {label: 'x', mine: 'n', classname: 'ss-minesweeper-left', near: 0, active: 'y'};
+                        buttons[i][j] = {label: 's', mine: 'n', classname: 'ss-minesweeper-left', near: 0, active: 'y'};
                     }
                     else {
-                        buttons[i][j] = {label: 'x', mine: 'n', near: 0, active: 'y'};
+                        buttons[i][j] = {label: 's', mine: 'n', near: 0, active: 'y'};
                     }
                 }
             }
@@ -76,11 +80,14 @@
             container.appendTo(this.shell);
             level.left = (height * width);
         },
-
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
-            this.element.find('button').css('width', '45').css('float', 'left').css('color', 'transparent');
+            this.element.find('.ss-minesweeper-buttons button').css('width', '45').css('float', 'left').css('color', 'transparent');
+            $('.ss-minesweeper-display').css('position', 'relative');
+            $('.ss-minesweeper-smiley').css('position', 'relative').css('top', '50%');
+            $('.ss-minesweeper-smiley').css('left', '50%');
             $('.ss-minesweeper-left').css('clear', 'left');
+            $('.ss-minesweeper-buttons').masonry({itemSelector: "button", isFitWidth: true, columnWidth: "button"});
         },
 
         _setOptions: function() {
@@ -119,6 +126,10 @@
         _clickHandler: function(e) {
             var btn = $(e.target).closest('button');
             if(e.which === 1) {
+                if(btn.find('span').text() === 'F') {
+                    this._setFlag(btn);
+                    return 0;
+                }
                 var result = this._checkMine(e, btn);
                 if(result === true) {
                     alert('Win!');
@@ -179,7 +190,7 @@
         _showBoard: function() {
             var x, y, level = this.options.levels[0], that = this;
 
-            $('button').each(function() {
+            $('.ss-minesweeper-buttons button').each(function() {
                 x = +$(this).attr('x');
                 y = +$(this).attr('y');
                 if(level.buttons[x][y].mine === 'y') {
@@ -197,12 +208,14 @@
             if(btn.active === 'y') {
                 if(btn.near !== 0) {
                     $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
+                    $('button[xy="' + c + '"]').button('disable').css('opacity', '1');
                     btn.active = 'n';
                     level.left--;
                     return 0;
                 }
                 else {
                     $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
+                    $('button[xy="' + c + '"]').button('disable').css('opacity', '1');
                     btn.active = 'n';
                     level.left--;
                     for(i = -1; i < 2; i ++) {
