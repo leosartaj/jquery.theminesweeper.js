@@ -11,7 +11,7 @@
         { height: 8 , width: 8, mines: 10 }
     ];
     var color = {
-        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', 9: 'black'
+        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', 9: 'black', m: 'red', t: 'red'
     };
 
     // Defines the widget
@@ -27,6 +27,11 @@
         },
 
         _create: function() {
+            var level = this.options.levels[0];
+
+            level.mleft = level.mines; 
+
+
             this.element.addClass('ss-minesweeper ui-widget ui-corner-all');
             this._createWrapper();
             this._createButtons();
@@ -42,7 +47,7 @@
             var el = $('<div/>');
 
             this.shell = el.clone().addClass('ss-minesweeper-shell ui-widget-header ui-corner-all'); 
-            this.display = el.clone().addClass('ss-minesweeper-display ui-corner-all ui-widget-content');
+            this.display = el.clone().addClass('ss-minesweeper-display ui-corner-all'); 
             this.display.appendTo(this.shell);
         },
 
@@ -50,7 +55,8 @@
             var el = $('<button/>'),span = $('<span/>'),container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
 
             el.clone().text('s').addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').button().appendTo(this.display);
-            span.clone().addClass('ss-minesweeper-mines').text(level.mines).appendTo(this.display);
+            span.clone().addClass('ss-minesweeper-mines').text(level.mleft).appendTo(this.display);
+            span.clone().addClass('ss-minesweeper-timer').text('00:00').appendTo(this.display);
 
             for(i = 0; i < width; i++) {
                 buttons[i] = [];
@@ -82,12 +88,7 @@
         },
         _renderMarkup: function() {
             this.shell.appendTo(this.element);
-            this.element.find('.ss-minesweeper-buttons button').css('width', '45').css('float', 'left').css('color', 'transparent');
-            $('.ss-minesweeper-display').css('position', 'relative');
-            $('.ss-minesweeper-smiley').css('position', 'relative').css('top', '50%');
-            $('.ss-minesweeper-smiley').css('left', '50%');
-            $('.ss-minesweeper-left').css('clear', 'left');
-            $('.ss-minesweeper-buttons').masonry({itemSelector: "button", isFitWidth: true, columnWidth: "button"});
+            this._setStyle();
         },
 
         _setOptions: function() {
@@ -243,13 +244,42 @@
         },
 
         _setFlag: function(ui) {
-            var span = ui.find('span');
+            var span = ui.find('span'), level = this.options.levels[0];
             if(span.text() === 'F') {
+                level.mleft++;
                 span.text('x').css('color', 'transparent');
             }
             else {
-                span.text('F').css('color', 'red');
+
+                if(level.mleft !== 0 ) {
+                    level.mleft--;
+                    span.text('F').css('color', 'red');
+                }
             }
+            $('.ss-minesweeper-mines').text(level.mleft);
+        },
+
+        _setStyle: function() {
+
+            var pad_left;
+
+            this.element.find('.ss-minesweeper-buttons button').css('width', '45').css('float', 'left').css('color', 'transparent');
+
+            $('.ss-minesweeper-display').css('position', 'relative');
+
+            $('.ss-minesweeper-smiley').css('position', 'relative').css('top', '50%').css('left', '50%');
+
+
+            $('.ss-minesweeper-mines').css('color', this.options.color.m).css('padding-right', '1em').css('float', 'right'); 
+
+            pad_left = $('.ss-minesweeper-display').css('padding-left');
+
+            $('.ss-minesweeper-timer').css('color', this.options.color.t).css('left', pad_left).css('padding-left', '1em').css('float', 'left').css('position', 'absolute'); 
+
+            $('.ss-minesweeper-left').css('clear', 'left');
+
+            $('.ss-minesweeper-buttons').masonry({itemSelector: "button", isFitWidth: true, columnWidth: "button"});
+
         }
 
 
