@@ -135,7 +135,7 @@
                 if(btn.data('r') === 1) {
                     this._restart();
                 }
-                else if(btn.find('span').text() === 'F') {
+                else if(btn.data('f') === 'f') {
                     this._setFlag(btn);
                     this._changeSmiley('1', '0');
                     return 0;
@@ -265,16 +265,18 @@
         },
 
         _setFlag: function(ui) {
-            var span = ui.find('span'), level = this.options.levels[0];
-            if(span.text() === 'F') {
+            level = this.options.levels[0];
+            if(ui.data('f') === 'f') {
                 level.mleft++;
-                span.text('x').css('color', 'transparent');
+                ui.button('option', 'icons', { primary: null, secondary: null });
+                ui.data('f', '');
             }
             else {
 
                 if(level.mleft !== 0 ) {
                     level.mleft--;
-                    span.text('F').css('color', 'red');
+                    ui.button('option', 'icons', { primary: 'flag-smiley', secondary: null });
+                    ui.data('f', 'f');
                 }
             }
             $('.ss-minesweeper-mines').text(level.mleft);
@@ -288,7 +290,7 @@
 
             $('.ss-minesweeper-display').css('position', 'relative');
 
-            $('.ss-minesweeper-smiley').css('position', 'relative').css('top', '50%').css('left', '50%');
+            $('.ss-minesweeper-smiley').css('position', 'relative').css('top', '50%').css('left', '45%');
 
 
             $('.ss-minesweeper-mines').css('color', this.options.color.m).css('padding-right', '1em').css('float', 'right'); 
