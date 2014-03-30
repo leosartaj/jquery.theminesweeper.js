@@ -11,7 +11,7 @@
         { height: 8 , width: 8, mines: 10 }
     ];
     var color = {
-        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', 9: 'black', m: 'red', t: 'red'
+        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red'
     };
 
     // Defines the widget
@@ -216,7 +216,7 @@
                 x = +$(this).attr('x');
                 y = +$(this).attr('y');
                 if(level.buttons[x][y].mine === 'y') {
-                    $(this).find('span').text('9').css('color', that.options.color[9]);
+                    $(this).button('option', 'icons', { primary: 'mine-smiley', secondary: null });
                 }
                 else{
                     $(this).find('span').text(level.buttons[x][y].near).css('color', that.options.color[level.buttons[x][y].near]);
