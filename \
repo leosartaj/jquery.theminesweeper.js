@@ -50,11 +50,11 @@
             this.display = el.clone().addClass('ss-minesweeper-display ui-corner-all'); 
             this.display.appendTo(this.shell);
             span.clone().addClass('ss-minesweeper-mines').text(level.mleft).appendTo(this.display);
-            span.clone().addClass('ss-minesweeper-timer').text('0.0').appendTo(this.display);
-            level.elapsed = 0.0;
+            span.clone().addClass('ss-minesweeper-timer').text('0').appendTo(this.display);
+            level.elapsed = 0;
             level.timer = $.timer(function() {
-                level.elapsed = level.elapsed + 0.01;
-                $('.ss-minesweeper-timer').text(level.elapsed.toPrecision(3));
+                level.elapsed++;
+                $('.ss-minesweeper-timer').text(level.elapsed);
             });
         },
 
@@ -136,7 +136,7 @@
         _clickHandler: function(e) {
             var btn = $(e.target).closest('button'), result;
             if(!this.options.levels[0].timer.isActive) {
-                this.options.levels[0].timer.set({ time: 10, autostart: true });
+                this.options.levels[0].timer.set({ time: 1000, autostart: true });
             }
             this._changeSmiley('0', '1');
             if(e.which === 1) {
@@ -319,9 +319,9 @@
             el.find('.ss-minesweeper-buttons').remove();
             $('.ss-minesweeper-smiley').remove();
             $('.ss-minesweeper-mines').text(level.mleft);
-            level.timer.stop();
-            level.elapsed = 0.0;
-            $('.ss-minesweeper-timer').text('0.0');
+            $('.ss-minesweeper-timer').text('00:00');
+            level.timer.play(reset);
+            $('.ss-minesweeper-timer').text('0');
             this._createButtons();
             this._renderMarkup();
             this._generateMines();

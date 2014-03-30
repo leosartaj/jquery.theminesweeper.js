@@ -9,6 +9,7 @@
         <script src="../libs/jquery-ui/jquery.ui.core.min.js"></script>
         <script src="../libs/jquery-ui/jquery.ui.widget.min.js"></script>
         <script src="../libs/masonry.min.js"></script>
+        <script src="../libs/jquery.timer.js"></script>
         <link rel="stylesheet" href="../libs/jquery-ui/jquery-ui.min.css">
         <!-- Load local lib -->
         <link rel="stylesheet" href="../src/jquery.theminesweeper.css">
@@ -17,9 +18,9 @@
     <body>
         <div id="ms"></div>
         <script>
-//$('#ms').theminesweeper({
-  //          levels: [ {height:16, width:16, mines:40}]});
-        $('#ms').theminesweeper().draggable();
+$('#ms').theminesweeper({
+            levels: [ {height:16, width:16, mines:40}]}).draggable();
+ //       $('#ms').theminesweeper().draggable();
         </script>
     </body>
 </html>
