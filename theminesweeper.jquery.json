@@ -1,27 +1,41 @@
 {
-  "name": "theminesweeper",
-  "title": "The Minesweeper",
-  "description": "A simple jquery-ui plugin that lets you play minesweeper in a webpage",
-  "version": "0.1.0",
-  "homepage": "https://github.com/leosartaj/jquery.minesweeper.js",
-  "author": {
-    "name": "Sartaj Singh",
-    "email": "singhsartaj94@gmail.com",
-    "url": "https://github.com/leosartaj"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/leosartaj/jquery.minesweeper.js.git"
-  },
-  "bugs": "https://github.com/leosartaj/jquery.minesweeper.js/issues",
-  "licenses": [
+    "name": "theminesweeper",
+    "title": "The Minesweeper",
+    "description": "A simple jquery-ui plugin that lets you play minesweeper in a webpage",
+    "version": "0.1.0",
+    "homepage": "https://github.com/leosartaj/jquery.minesweeper.js",
+    "author": {
+        "name": "Sartaj Singh",
+        "email": "singhsartaj94@gmail.com",
+        "url": "https://github.com/leosartaj"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/leosartaj/jquery.minesweeper.js.git"
+    },
+    "bugs": "https://github.com/leosartaj/jquery.minesweeper.js/issues",
+    "licenses": [
     {
-      "type": "MIT",
-      "url": "https://github.com/leosartaj/jquery.minesweeper.js/blob/master/LICENSE-MIT"
+        "type": "MIT",
+        "url": "https://github.com/leosartaj/jquery.minesweeper.js/blob/master/LICENSE-MIT"
     }
-  ],
-  "dependencies": {
-    "jquery": "*"
-  },
-  "keywords": []
+    ],
+    "dependencies": {
+        "jquery": "*",
+        "jquery-ui-core": "*",
+        "jquery-ui-widget": "*",
+        "jquery-ui-button": "*",
+        "jquery-ui-core": "*",
+        "masonry.js": "*",
+        "jquery.timer.js": "*"
+    },
+    "keywords": [
+        "minesweeper",
+        "game",
+        "fun",
+        "idle",
+        "ui",
+        "custom",
+        "jquery"
+    ]
 }

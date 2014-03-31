@@ -24,6 +24,10 @@ module.exports = function(grunt) {
         src: ['src/jquery.<%= pkg.name %>.js'],
         dest: 'dist/jquery.<%= pkg.name %>.js'
       },
+      target: {
+        src: ['src/jquery.<%= pkg.name %>.css'],
+        dest: 'dist/jquery.<%= pkg.name %>.css'
+      }
     },
     uglify: {
       options: {
