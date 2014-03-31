@@ -11,16 +11,35 @@ Download the [production version][min] or the [development version][max].
 In your web page:
 
 ```html
-<script src="jquery.js"></script>
-<script src="dist/theminesweeper.min.js"></script>
+<!-- Load libs -->
+<script src="../libs/jquery/jquery.js"></script>
+<!-- containe jquery-ui-core, jquery-ui-button, jquery-ui-widget -->
+<script src="../libs/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="../libs/masonry.min.js"></script>
+<script src="../libs/jquery.timer.js"></script>
+<!-- for theme from the themeroller -->
+<link rel="stylesheet" href="../libs/jquery-ui/theme/jquery-ui.min.css">
+<!-- Load the plugin -->
+<link rel="stylesheet" href="../dist/jquery.theminesweeper.css">
+<script src="../dist/jquery.theminesweeper.min.js"></script>
+
 <script>
-jQuery(function($) {
-  $.awesome(); // "awesome"
-});
+
+    jQuery(function($) {
+        // select an empty div tag and call theminesweeper to initialize
+        $('#(id)').theminesweeper();
+    });
+
 </script>
+
 ```
 
 ## Documentation
+The Plugin can be initialized using the 'theminesweeper()' function on a an empty div tag.
+
+The Plugin Can be configured using an initializing object just like anyother jquery-ui plugin or by the 'option' option after initialization.
+
+### Configurable Options
 _(Coming soon)_
 
 ## Examples
