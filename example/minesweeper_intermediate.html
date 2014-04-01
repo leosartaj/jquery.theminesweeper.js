@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>The Minesweeper Example</title>
+        <title>The Minesweeper Example - Intermediate</title>
         <!-- Load libs -->
         <script src="../libs/jquery/jquery.js"></script>
         <script src="../libs/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
@@ -11,15 +11,14 @@
         <!-- for theme from the themeroller -->
         <link rel="stylesheet" href="../libs/jquery-ui/theme/jquery-ui.min.css">
         <!-- Load the plugin -->
-        <link rel="stylesheet" href="../src/jquery.theminesweeper.css">
-        <script src="../src/jquery.theminesweeper.js"></script>
+        <link rel="stylesheet" href="css/jquery.theminesweeper.intermediate.css">
+        <script src="../dist/jquery.theminesweeper.min.js"></script>
     </head>
     <body>
         <div id="ms"></div>
         <script>
-//$('#ms').theminesweeper({
-  //          levels: [ {height:16, width:16, mines:40}]}).draggable();
-        $('#ms').theminesweeper().draggable();
+            $('#ms').theminesweeper({
+                levels: [ {height:16, width:16, mines:40}]}).draggable();
         </script>
     </body>
 </html>

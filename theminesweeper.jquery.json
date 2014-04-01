@@ -37,5 +37,7 @@
         "ui",
         "custom",
         "jquery"
-    ]
+    ],
+    "docs": "https://github.com/jquery.minesweeper.js/blob/master/README.md",
+    "demo": "https://github.com/jquery.minesweeper.js/tree/master/example"
 }

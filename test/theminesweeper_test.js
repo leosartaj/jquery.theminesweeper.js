@@ -33,7 +33,7 @@
     strictEqual(this.elems.theminesweeper(), this.elems, 'should be chainable');
   });
 
-/*  test('is awesome', function() {
+  /*test('is awesome', function() {
     expect(1);
     strictEqual(this.elems.theminesweeper().text(), 'awesome0awesome1awesome2', 'should be awesome');
   }); */

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Minesweeper Example - Advanced</title>
+        <!-- Load libs -->
+        <script src="../libs/jquery/jquery.js"></script>
+        <script src="../libs/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+        <script src="../libs/masonry.min.js"></script>
+        <script src="../libs/jquery.timer.js"></script>
+        <!-- for theme from the themeroller -->
+        <link rel="stylesheet" href="../libs/jquery-ui/theme/jquery-ui.min.css">
+        <!-- Load the plugin -->
+        <link rel="stylesheet" href="css/jquery.theminesweeper.advanced.css">
+        <script src="../dist/jquery.theminesweeper.js"></script>
+    </head>
+    <body>
+        <div id="ms"></div>
+        <script>
+            $('#ms').theminesweeper({
+                levels: [ {height:16, width:30, mines:99}]}).draggable();
+        </script>
+    </body>
+</html>
