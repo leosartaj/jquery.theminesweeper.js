@@ -2,7 +2,7 @@
     "name": "theminesweeper",
     "title": "The Minesweeper",
     "description": "A simple jquery-ui plugin that lets you play minesweeper in a webpage",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "homepage": "https://github.com/leosartaj/jquery.theminesweeper.js",
     "author": {
         "name": "Sartaj Singh",
@@ -38,6 +38,6 @@
         "custom",
         "jquery"
     ],
-    "docs": "https://github.com/jquery.theminesweeper.js/blob/master/README.md",
-    "demo": "https://github.com/jquery.theminesweeper.js/tree/master/example"
+    "docs": "https://github.com/leosartaj/jquery.theminesweeper.js/blob/master/README.md",
+    "demo": "https://github.com/leosartaj/jquery.theminesweeper.js/tree/master/example"
 }
