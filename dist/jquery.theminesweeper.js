@@ -59,6 +59,12 @@
             span.clone().addClass('ss-minesweeper-mines').text(level.mleft).appendTo(this.display);
             span.clone().addClass('ss-minesweeper-timer').text('0.0').appendTo(this.display);
 
+        },
+
+        _createButtons: function() {
+
+            var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
+
             // counts the elapsed time
             level.elapsed = 0.0;
             
@@ -68,11 +74,6 @@
                 level.elapsed = level.elapsed + 0.01;
                 $('.ss-minesweeper-timer').text(level.elapsed.toPrecision(3));
             });
-        },
-
-        _createButtons: function() {
-
-            var el = $('<button/>'), container = $('<div/>').addClass('ss-minesweeper-buttons ui-helper-clearfix ui-widget-content ui-corner-all'), i = 0, j, level = this.options.levels[0], height = level.height, width = level.width, buttons = [];
 
             // initializing smiley button
             el.clone().addClass('ss-minesweeper-smiley ui-widget-content ui-corner-all').data('r', 1).appendTo(this.display).button({
@@ -151,8 +152,9 @@
                 this._generateMines();
                 this._renderMarkup();
             }
-            else if(key === 'disable') {
-                this.shell.find('button').button('option', key, val);
+            else if(key === 'color') {
+                $('.ss-minesweeper-mines').css('color', this.options.color.m);
+                $('.ss-minesweeper-timer').css('color', this.options.color.t);
             }
         },
 
