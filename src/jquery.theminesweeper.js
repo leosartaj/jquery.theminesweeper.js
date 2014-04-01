@@ -306,14 +306,21 @@
         // shows paricular region on a non-mine click
         _showRegion: function(x, y) {
 
-            var c = x + ',' + y, level = this.options.levels[0], btn = level.buttons[x][y], i, j, nx, ny;
+            var c = x + ',' + y, level = this.options.levels[0], btn = level.buttons[x][y], i, j, nx, ny, ui = $('button[xy="' + c + '"]');
 
             if(btn.active === 'y') {
 
                 if(btn.near !== 0) {
 
-                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
-                    $('button[xy="' + c + '"]').button('disable').css('opacity', '1');
+                    // remove if flagged
+                    if(ui.data('f') === 'f') {
+
+                        this._setFlag(ui);
+
+                    }
+
+                    ui.find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
+                    ui.button('disable').css('opacity', '1');
 
                     btn.active = 'n';
                     level.left--;
@@ -321,8 +328,16 @@
                     return 0;
                 }
                 else {
-                    $('button[xy="' + c + '"]').find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
-                    $('button[xy="' + c + '"]').button('disable').css('opacity', '1');
+
+                    // remove if flagged
+                    if(ui.data('f') === 'f') {
+
+                        this._setFlag(ui);
+
+                    }
+
+                    ui.find('span').text(btn.near).css('color', this.options.color[btn.near]).css('background', 'white');
+                    ui.button('disable').css('opacity', '1');
 
                     btn.active = 'n';
                     level.left--;

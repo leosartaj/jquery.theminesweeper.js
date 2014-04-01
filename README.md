@@ -3,14 +3,14 @@
 A simple jquery-ui plugin that lets you play minesweeper in a webpage
 
 ## Getting Started
-Download the js [production version][min] or the [development version][max].
+Download the plugin [production version][min] or the [development version][max].
 
-[min]: https://raw.githubusercontent.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.min.js
-[max]: https://raw.githubusercontent.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.js
+[min]: https://raw.githubusercontent.com/leosartaj/jquery.theminesweeper.js/master/dist/theminesweeper.min.js
+[max]: https://raw.githubusercontent.com/leosartaj/jquery.theminesweeper.js/master/dist/theminesweeper.js
 
-Download the [css][min].
+Download the [css][mins].
 
-[min]: https://raw.githubusercontent.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.css
+[mins]: https://raw.githubusercontent.com/leosartaj/jquery.theminesweeper.js/master/dist/theminesweeper.css
 
 In your web page:
 
@@ -127,10 +127,10 @@ In the css file for the plugin, set the path for desired smilies.
 ```
 
 ## Examples
-Checkout the examples in example directory
+Checkout the examples in the example directory
 
 ## Release History
 Check The Release History [On Jquery][min] or [On Github][max]
 
 [min]: https://plugins.jquery.com/theminesweeper
-[max]: https://github.com/leosartaj/jquery.minesweeper.js/releases
+[max]: https://github.com/leosartaj/jquery.theminesweeper.js/releases
