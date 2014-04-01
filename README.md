@@ -15,6 +15,7 @@ Download the [css][mins].
 In your web page:
 
 ```html
+
 <!-- Load libs -->
 <script src="../libs/jquery/jquery.js"></script>
 <!-- containe jquery-ui-core, jquery-ui-button, jquery-ui-widget -->
@@ -35,6 +36,7 @@ In your web page:
     });
 
 </script>
+
 ```
 
 ## Documentation
@@ -57,6 +59,7 @@ $('#id').theminesweeper({
 ```
 
 ##### OR
+
 After initialization
 
 ```javascript
@@ -82,8 +85,8 @@ m stands for mines left displayer.
 t stands for timer.
 
 ##### OR
-After initialization
 
+After initialization
 
 ```javascript
 
@@ -127,10 +130,12 @@ In the css file for the plugin, set the path for desired smilies.
 ```
 
 ## Examples
+
 Checkout the examples in the example directory
 
 ## Release History
-Check The Release History [On Jquery][min] or [On Github][max]
 
-[min]: https://plugins.jquery.com/theminesweeper
-[max]: https://github.com/leosartaj/jquery.theminesweeper.js/releases
+Check The Release History [On Jquery][mint] or [On Github][maxt]
+
+[mint]: https://plugins.jquery.com/theminesweeper
+[maxt]: https://github.com/leosartaj/jquery.theminesweeper.js/releases
