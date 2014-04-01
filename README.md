@@ -5,12 +5,12 @@ A simple jquery-ui plugin that lets you play minesweeper in a webpage
 ## Getting Started
 Download the js [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.min.js
-[max]: https://raw.github.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.js
+[min]: https://raw.githubusercontent.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.min.js
+[max]: https://raw.githubusercontent.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.js
 
 Download the [css][min].
 
-[min]: https://raw.github.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.min.css
+[min]: https://raw.githubusercontent.com/leosartaj/jquery.minesweeper.js/master/dist/theminesweeper.css
 
 In your web page:
 
@@ -133,4 +133,4 @@ Checkout the examples in example directory
 Check The Release History [On Jquery][min] or [On Github][max]
 
 [min]: https://plugins.jquery.com/theminesweeper
-[max]: https://raw.github.com/leosartaj/jquery.minesweeper.js/releases
+[max]: https://github.com/leosartaj/jquery.minesweeper.js/releases
