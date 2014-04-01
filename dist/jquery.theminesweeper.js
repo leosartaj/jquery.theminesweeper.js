@@ -1,4 +1,4 @@
-/*! The Minesweeper - v0.1.0 - 2014-04-02
+/*! The Minesweeper - v0.1.2 - 2014-04-02
 * https://github.com/leosartaj/jquery.theminesweeper.js
 * Copyright (c) 2014 Sartaj Singh; Licensed MIT */
 (function($) {
@@ -22,7 +22,7 @@
 
         
         // widget currrent version
-        version: '0.1.0',
+        version: '0.1.2',
 
         // configurable options
         options: {
