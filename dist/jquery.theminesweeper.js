@@ -1,5 +1,5 @@
 /*! The Minesweeper - v0.1.0 - 2014-04-02
-* https://github.com/leosartaj/jquery.minesweeper.js
+* https://github.com/leosartaj/jquery.theminesweeper.js
 * Copyright (c) 2014 Sartaj Singh; Licensed MIT */
 (function($) {
 
