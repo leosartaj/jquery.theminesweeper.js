@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Jquery.theminesweeper.js : A simple jquery-ui plugin that lets you play minesweeper in a webpage" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Jquery.theminesweeper.js</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/leosartaj/jquery.theminesweeper.js">View on GitHub</a>
+
+          <h1 id="project_title">Jquery.theminesweeper.js</h1>
+          <h2 id="project_tagline">A simple jquery-ui plugin that lets you play minesweeper in a webpage</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/leosartaj/jquery.theminesweeper.js/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/leosartaj/jquery.theminesweeper.js/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="the-minesweeper" class="anchor" href="#the-minesweeper"><span class="octicon octicon-link"></span></a>The Minesweeper</h1>
+
+<p>A simple jquery-ui plugin that lets you play minesweeper in a webpage</p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Download the plugin <a href="https://raw.githubusercontent.com/leosartaj/jquery.theminesweeper.js/master/dist/jquery.theminesweeper.min.js">production version</a> or the <a href="https://raw.githubusercontent.com/leosartaj/jquery.theminesweeper.js/master/dist/jquery.theminesweeper.js">development version</a>.</p>
+
+<p>In your web page:</p>
+
+<div class="highlight highlight-html"><pre>
+<span class="c">&lt;!-- Load libs --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"../libs/jquery/jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- containe jquery-ui-core, jquery-ui-button, jquery-ui-widget --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"../libs/jquery-ui/jquery-ui-1.10.4.custom.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"../libs/masonry.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"../libs/jquery.timer.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="c">&lt;!-- for theme from the themeroller --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"../libs/jquery-ui/theme/jquery-ui.min.css"</span><span class="nt">&gt;</span>
+<span class="c">&lt;!-- Load the plugin --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"../dist/jquery.theminesweeper.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"../dist/jquery.theminesweeper.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+
+    <span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// select an empty div tag and call theminesweeper to initialize</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#(id)'</span><span class="p">).</span><span class="nx">theminesweeper</span><span class="p">();</span>
+    <span class="p">});</span>
+
+<span class="nt">&lt;/script&gt;</span>
+
+</pre></div>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>The Plugin can be initialized using the 'theminesweeper()' function on a an empty div tag.</p>
+
+<p>The Plugin Can be configured using an initializing object just like any other jquery-ui plugin or by the 'option' option after initialization.</p>
+
+<h3>
+<a name="configurable-options" class="anchor" href="#configurable-options"><span class="octicon octicon-link"></span></a>Configurable Options</h3>
+
+<h4>
+<a name="levels" class="anchor" href="#levels"><span class="octicon octicon-link"></span></a>levels</h4>
+
+<p>levels array allows to initialize level of your choice. It contains a single object having height, width and mines property.
+Here's an example :</p>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#id'</span><span class="p">).</span><span class="nx">theminesweeper</span><span class="p">({</span>
+    <span class="nx">levels</span><span class="o">:</span> <span class="p">[</span> <span class="p">{</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">mines</span><span class="o">:</span> <span class="mi">10</span> <span class="p">}</span> <span class="p">]</span>
+<span class="p">});</span>
+
+</pre></div>
+
+<h5>
+<a name="or" class="anchor" href="#or"><span class="octicon octicon-link"></span></a>OR</h5>
+
+<p>After initialization</p>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#id'</span><span class="p">).</span><span class="nx">theminesweeper</span><span class="p">(</span> <span class="s1">'option'</span><span class="p">,</span> <span class="s1">'levels'</span><span class="p">,</span> <span class="p">[</span> <span class="p">{</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">mines</span><span class="o">:</span> <span class="mi">10</span> <span class="p">}</span> <span class="p">]</span> <span class="p">);</span>
+
+</pre></div>
+
+<h4>
+<a name="color" class="anchor" href="#color"><span class="octicon octicon-link"></span></a>color</h4>
+
+<p>color object allows to set custom colors for the various elements.
+Here's an example :</p>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#id'</span><span class="p">).</span><span class="nx">theminesweeper</span><span class="p">({</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="p">{</span> <span class="mi">0</span><span class="o">:</span> <span class="s1">'transparent'</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s1">'blue'</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s1">'green'</span><span class="p">,</span> <span class="mi">3</span><span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span> <span class="mi">4</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">5</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">6</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">7</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">8</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="nx">m</span><span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span> <span class="nx">t</span><span class="o">:</span> <span class="s1">'red'</span> <span class="p">}</span>
+<span class="p">});</span>
+
+</pre></div>
+
+<p>0 represents no mine, likewise 1 stands for 1 mine, 2 for 2 and so on.
+m stands for mines left displayer.
+t stands for timer.</p>
+
+<h5>
+<a name="or-1" class="anchor" href="#or-1"><span class="octicon octicon-link"></span></a>OR</h5>
+
+<p>After initialization</p>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#id'</span><span class="p">).</span><span class="nx">theminesweeper</span><span class="p">(</span> <span class="s1">'option'</span><span class="p">,</span> <span class="s1">'color'</span><span class="p">,</span> 
+    <span class="p">{</span> <span class="mi">0</span><span class="o">:</span> <span class="s1">'transparent'</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s1">'blue'</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s1">'green'</span><span class="p">,</span> <span class="mi">3</span><span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span> <span class="mi">4</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">5</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">6</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">7</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="mi">8</span><span class="o">:</span> <span class="s1">'black'</span><span class="p">,</span> <span class="nx">m</span><span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span> <span class="nx">t</span><span class="o">:</span> <span class="s1">'red'</span> <span class="p">}</span>
+<span class="p">);</span>
+
+</pre></div>
+
+<h4>
+<a name="smiley" class="anchor" href="#smiley"><span class="octicon octicon-link"></span></a>Smiley</h4>
+
+<p>In the css file for the plugin, set the path for desired smilies.</p>
+
+<div class="highlight highlight-css"><pre>
+<span class="c">/* location of custom icons */</span>
+<span class="nc">.happy-smiley</span> <span class="p">{</span>
+    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(Path)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.check-smiley</span> <span class="p">{</span>
+    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(Path)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sad-smiley</span> <span class="p">{</span>
+    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(Path)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.cool-smiley</span> <span class="p">{</span>
+    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(Path)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.flag-smiley</span> <span class="p">{</span>
+    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(Path)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.mine-smiley</span> <span class="p">{</span>
+    <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(Path)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></div>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Checkout the examples in the example directory</p>
+
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+
+<p>Check The Release History <a href="https://plugins.jquery.com/theminesweeper">On Jquery</a> or <a href="https://github.com/leosartaj/jquery.theminesweeper.js/releases">On Github</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Jquery.theminesweeper.js maintained by <a href="https://github.com/leosartaj">leosartaj</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
