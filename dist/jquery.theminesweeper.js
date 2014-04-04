@@ -17,6 +17,11 @@
         0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red'
     };
 
+    // disabling menu at right click
+    window.oncontextmenu = function () {
+        return false;
+    };
+
     // Defines the widget
     $.widget('ss.theminesweeper', {
 
