@@ -1,4 +1,4 @@
-/*! The Minesweeper - v0.1.2 - 2014-04-04
+/*! The Minesweeper - v0.1.4 - 2014-04-04
 * https://github.com/leosartaj/jquery.theminesweeper.js
 * Copyright (c) 2014 Sartaj Singh; Licensed MIT */
 .ss-minesweeper-shell {
@@ -21,7 +21,7 @@
 
 /* location of custom icons */
 .happy-smiley {
-    background-image: url(../example/images/smiley.png) !important;
+    background-image: url(../example/images/smiley1.png) !important;
 }
 
 .check-smiley {
