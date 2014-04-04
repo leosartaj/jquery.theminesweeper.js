@@ -25,26 +25,26 @@
 
 /* location of custom icons */
 .happy-smiley {
-    background-image: url(../images/smiley1.ico) !important;
+    background-image: url(../images/smiley1.png) !important;
 }
 
 .check-smiley {
-    background-image: url(../images/smiley2.ico) !important;
+    background-image: url(../images/smiley2.png) !important;
 }
 
 .sad-smiley {
-    background-image: url(../images/smiley3.ico) !important;
+    background-image: url(../images/smiley3.png) !important;
 }
 
 .cool-smiley {
-    background-image: url(../images/smiley.ico) !important;
+    background-image: url(../images/smiley.png) !important;
 }
 
 .flag-smiley {
-    background-image: url(../images/flag.ico) !important;
+    background-image: url(../images/flag.png) !important;
 }
 
 .mine-smiley {
-    background-image: url(../images/mine.ico) !important;
+    background-image: url(../images/mine.png) !important;
 }
 
