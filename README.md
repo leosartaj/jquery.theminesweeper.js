@@ -71,7 +71,7 @@ Here's an example :
 ```javascript
 
 $('#id').theminesweeper({
-    color: { 0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red' }
+    color: { 0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red', h: 'red' }
 });
 
 ```
@@ -79,6 +79,7 @@ $('#id').theminesweeper({
 0 represents no mine, likewise 1 stands for 1 mine, 2 for 2 and so on.
 m stands for mines left displayer.
 t stands for timer.
+h stands for the text color incase hint option is set to true
 
 ##### OR
 
@@ -124,6 +125,18 @@ In the css file for the plugin, set the path for desired smilies.
 }
 
 ```
+
+####hint
+
+This configurable option when set to true allows the hint feature. By clicking the middle mouse a user can check if there is a mine beneath a tile. This feature works for limited times(as defined by hintc option). By default hint option is set to false.
+
+####hintc
+
+This configurable option allows the possible number of times hints can be used. By default it is '1'.
+
+####hintt
+
+This configurable options defines the text displayed in case there is a mine. By default it is 'X'.
 
 ## Examples
 

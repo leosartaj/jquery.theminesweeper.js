@@ -15,11 +15,12 @@
         <script src="../dist/jquery.theminesweeper.min.js"></script>
     </head>
     <body>
-        <h3> Use middle mouse to set a flag </h3>
+        <h3> Use right click to set a flag </h3>
+        <h3> Use middle mouse to use a hint </h3>
         <div id="ms"></div>
         <script>
             $('#ms').theminesweeper({
-                levels: [ {height:16, width:30, mines:99}]}).draggable();
+                levels: [ {height:16, width:30, mines:99}], hint: true }).draggable();
         </script>
     </body>
 </html>

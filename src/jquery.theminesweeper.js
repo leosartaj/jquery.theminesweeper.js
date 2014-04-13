@@ -18,7 +18,7 @@
     // m for mines left
     // t for timer
     var color = {
-        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red'
+        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red', h: 'red'
     };
 
     // disabling menu at right click
@@ -36,7 +36,10 @@
         // configurable options
         options: {
             levels: levels,
-            color: color
+            color: color,
+            hint: false,
+            hintc: 1,
+            hintt: 'X'
         },
 
         _create: function() {
@@ -45,6 +48,9 @@
 
             // copying total number of mines for mines left displayer
             level.mleft = level.mines; 
+
+            // Allowed number of hints
+            this.options.levels[0].hint = this.options.hintc;
 
             this.element.addClass('ss-minesweeper ui-widget ui-corner-all');
             this._createWrapper();
@@ -165,6 +171,9 @@
                 $('.ss-minesweeper-mines').css('color', this.options.color.m);
                 $('.ss-minesweeper-timer').css('color', this.options.color.t);
             }
+            else if(key === 'hintc') {
+                this.options.levels[0].hint = val;
+            }
         },
 
         // random mine generator function
@@ -222,7 +231,17 @@
                     }
                 }
             }
-            else {
+            // Allows the hint option
+            else if(e.which === 2 && this.options.hint === true && this.options.levels[0].hint !== 0) {
+
+                this.options.levels[0].hint--;
+
+                // Warns if their is a mine
+                if(this._checkMine(e, btn) === false) {
+                    btn.find('span').text(this.options.hintt).css('color', this.options.color.h);
+                }
+            }
+            else if(e.which === 3) {
                 if(btn.data('r') === 1) {
                     this._restart();
                 }
@@ -240,7 +259,10 @@
 
             var level = this.options.levels[0], x = +ui.attr('x'), y = +ui.attr('y');
 
-            if(level.buttons[x][y].mine === 'y') {
+            if(level.buttons[x][y].mine === 'y' && e.which === 2) {
+                return false;
+            }
+            else if(level.buttons[x][y].mine === 'y') {
                 this._showBoard();
                 this._changeSmiley('1', '2');
                 return false;
@@ -462,6 +484,9 @@
             level.timer.stop();
             level.elapsed = 0.0;
             $('.ss-minesweeper-timer').text('0.0');
+
+            // Resets the allowed number of hints
+            this.options.levels[0].hint = this.options.hintc;
 
             // re-initializing board
             this._createButtons();
