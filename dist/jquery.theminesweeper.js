@@ -14,7 +14,7 @@
     // m for mines left
     // t for timer
     var color = {
-        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red', h: 'red'
+        0: 'transparent', 1: 'blue', 2: 'green', 3: 'red', 4: 'black', 5: 'black', 6: 'black', 7: 'black', 8: 'black', m: 'red', t: 'red'
     };
 
     // disabling menu at right click
@@ -34,8 +34,7 @@
             levels: levels,
             color: color,
             hint: false,
-            hintc: 1,
-            hintt: 'X'
+            hintc: 1
         },
 
         _create: function() {
@@ -234,7 +233,7 @@
 
                 // Warns if their is a mine
                 if(this._checkMine(e, btn) === false) {
-                    btn.find('span').text(this.options.hintt).css('color', this.options.color.h);
+                    this._setFlag(btn);
                 }
             }
             else if(e.which === 3) {
@@ -248,6 +247,7 @@
             
             // changing smiley
             this._changeSmiley('1', '0');
+
         },
 
         // checks if there is a mine

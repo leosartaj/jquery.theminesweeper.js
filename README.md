@@ -126,17 +126,13 @@ In the css file for the plugin, set the path for desired smilies.
 
 ```
 
-####hint
+####Hint
 
 This configurable option when set to true allows the hint feature. By clicking the middle mouse a user can check if there is a mine beneath a tile. This feature works for limited times(as defined by hintc option). By default hint option is set to false.
 
-####hintc
+####Hintc
 
 This configurable option allows the possible number of times hints can be used. By default it is '1'.
-
-####hintt
-
-This configurable options defines the text displayed in case there is a mine. By default it is 'X'.
 
 ## Examples
 
