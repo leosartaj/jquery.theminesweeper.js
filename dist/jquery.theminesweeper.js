@@ -1,4 +1,4 @@
-/*! The Minesweeper - v0.1.4 - 2014-04-14
+/*! The Minesweeper - v0.1.4 - 2014-04-16
 * https://github.com/leosartaj/jquery.theminesweeper.js
 * Copyright (c) 2014 Sartaj Singh; Licensed MIT */
 (function($) {
@@ -231,8 +231,14 @@
 
                 this.options.levels[0].hint--;
 
+                //disabling buttons
+                if(this._checkMine(e, btn) === true) {
+                    this.element.find('.ss-minesweeper-buttons button').button('disable').css('opacity', '1');
+                    return 0;
+                }
+
                 // Warns if their is a mine
-                if(this._checkMine(e, btn) === false) {
+                if(this._checkMine(e, btn) === 1) {
                     this._setFlag(btn);
                 }
             }
@@ -256,7 +262,7 @@
             var level = this.options.levels[0], x = +ui.attr('x'), y = +ui.attr('y');
 
             if(level.buttons[x][y].mine === 'y' && e.which === 2) {
-                return false;
+                return 1;
             }
             else if(level.buttons[x][y].mine === 'y') {
                 this._showBoard();
